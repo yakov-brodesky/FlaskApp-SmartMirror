@@ -107,7 +107,9 @@
     </div>
 </div>
 
-
+<div class="dvLastUpdate">
+    <span id="id_LastUpdate"></span>
+</div>
 
 <script defer>
 fetch('https://www.hebcal.com/shabbat?cfg=i2&geonameid=281184&M=on&lg=s&tgt=_top')
@@ -118,6 +120,8 @@ fetch('https://www.hebcal.com/shabbat?cfg=i2&geonameid=281184&M=on&lg=s&tgt=_top
 
 <script type="text/javascript">
     window.onload = setInterval(clock,1000);
+    setLastUpdate();
+
     function clock()
     {
         var d = new Date();
@@ -129,6 +133,11 @@ fetch('https://www.hebcal.com/shabbat?cfg=i2&geonameid=281184&M=on&lg=s&tgt=_top
         document.getElementById("dattimeHolder").innerHTML=date+" "+month+", "+year;
         document.getElementById('dayMonthYearHolder').innerHTML =d.toDateString()
         document.getElementById('timeOfDayHolder').innerHTML=d.toTimeString().slice(0,8)
+    }
+
+    function setLastUpdate()
+    {
+        document.getElementById('id_LastUpdate').innerHTML = 'Last updated: ' + (new Date()).toTimeString().slice(0,8)
     }
     </script>
 {% endblock %}

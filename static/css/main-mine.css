@@ -55,3 +55,9 @@ body
     font-size: 3em;
     font-family:fantasy;
 }
+
+.dvLastUpdate
+{
+    position:fixed;
+    bottom: 20px;
+}

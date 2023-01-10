@@ -222,10 +222,28 @@ def get_4_day_weather_data():
 
 
 
-def get_hebrew_date():
+def get_hebrew_date(areaId):
     
+    localAreaId=areaId
+    if localAreaId is None:
+        localAreaId=281184
+
+    urlForZemanim =f'https://www.hebcal.com/zmanim?cfg=json&geonameid={localAreaId}'
+
+
+    response_zemanim = requests.get(urlForZemanim)
+    #print(response.content)
+    result_zm = response_zemanim.json()
+    sunset =  datetime.strptime(result_zm['times']['sunset'], '%Y-%m-%dT%H:%M:%S%z').time()
+    
+    IsAfterSunset ='off'
+    if datetime.now().time() > sunset:
+        IsAfterSunset ='on'
+
+
+
     dt_today = datetime.now().strftime("%Y-%m-%d")
-    url =f'https://www.hebcal.com/converter?cfg=json&date={dt_today}&g2h=1&strict=1&gs=off'
+    url =f'https://www.hebcal.com/converter?cfg=json&date={dt_today}&g2h=1&strict=1&gs={IsAfterSunset}'
 
     result = requests.get(url).json()
 
@@ -296,7 +314,7 @@ def index():
     weather_data = get_weather_data()
     zemanim = get_zemanim(281184)
     _4DayForcast = get_4_day_weather_data()
-    hebrew_dates = get_hebrew_date()
+    hebrew_dates = get_hebrew_date(None)
     #rss= get_Inn_Rss()
     #return render_template('index.html',data = weather_data, Zemanim = zemanim,_4DayForCast = _4DayForcast[0],_4day_type2 =_4DayForcast[1])
     return render_template('index.html',data = weather_data, Zemanim = zemanim,_4day_type2 =_4DayForcast[0], hebrew_dates = hebrew_dates)
