@@ -222,6 +222,18 @@ def get_4_day_weather_data():
 
 
 
+def get_hebrew_date():
+    
+    dt_today = datetime.now().strftime("%Y-%m-%d")
+    url =f'https://www.hebcal.com/converter?cfg=json&date={dt_today}&g2h=1&strict=1&gs=off'
+
+    result = requests.get(url).json()
+
+    hebrew_date = result['hebrew']
+    hebrew_date_eng = f'{result["hd"]} of {result["hm"]}, {result["hy"]}'
+
+    return (hebrew_date,hebrew_date_eng)
+
 
 def get_zemanim(areaId):
     #datetime.strptime(chatzotNight, '%Y-%m-%dT%H:%M:%S%z')
@@ -284,9 +296,10 @@ def index():
     weather_data = get_weather_data()
     zemanim = get_zemanim(281184)
     _4DayForcast = get_4_day_weather_data()
+    hebrew_dates = get_hebrew_date()
     #rss= get_Inn_Rss()
     #return render_template('index.html',data = weather_data, Zemanim = zemanim,_4DayForCast = _4DayForcast[0],_4day_type2 =_4DayForcast[1])
-    return render_template('index.html',data = weather_data, Zemanim = zemanim,_4day_type2 =_4DayForcast[0])
+    return render_template('index.html',data = weather_data, Zemanim = zemanim,_4day_type2 =_4DayForcast[0], hebrew_dates = hebrew_dates)
 
 if __name__ =="__main__":
     app.run(debug=True)
