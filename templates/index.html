@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+<!-- <script type="text/javascript">
+    window.onload = setInterval(clock,1000);
+    function clock()
+    {
+        var d = new Date();
+        var date = d.getDate();
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        var monthArr = ["January", "February","March", "April", "May", "June", "July", "August", "September", "October", "November","December"];
+        month = monthArr[month];
+        document.getElementById("dattimeHolder").innerHTML=date+" "+month+", "+year;
+    }
+    </script> -->
+
+{% block head %}
+<title>Smart Mirror - (With Flask) </title>
+
+{% endblock %}
+
+{% block body %}
+<h1>Smart Mirror</h1>
+<div class="dvWeatherWrapper">
+    <div class="dvDescription">
+        <div>
+            <img src="{{data.Weather_description.icon}}" alt="weather_icon"  class="weatherIcn">
+        </div>
+        <div>
+        <span>{{data.Weather_description.description}}</span>
+    </div>
+    
+    </div>
+    <!-- <table>
+        <tr>
+            <td>
+
+            </td>
+        </tr>
+    </table> -->
+    <ul>
+        <!-- <li>
+            
+
+
+
+        </li> -->
+        <li>Temp : {{data.main_data.temp}}&deg;</li>
+        <li class="temp_hi" >Hi : {{data.main_data.max_temp}}&deg;</li>
+        <li class="temp_low" >Low : {{data.main_data.min_temp}}&deg;</li>
+        
+    </ul>
+    
+
+    
+    
+          <!--
+ dayName: str
+    dailyMin : str
+    dailyMax : str
+    weather_icon_max : str
+    weather_icon_min : str
+
+            -->
+    <div style="clear:both;">
+        <table>
+      
+        {% for dailyMinMax in _4day_type2 %}
+            <tr>
+                 <td>  {{ dailyMinMax.dayName }}  </td>  
+                 <td class="temp_hi">
+                        <img src='https://openweathermap.org/img/wn/{{dailyMinMax.weather_icon_max }}@2x.png'>
+                     </td>
+                    <td class="temp_low">
+                        <img src='https://openweathermap.org/img/wn/{{dailyMinMax.weather_icon_min }}@2x.png'>
+                    </td>
+                 <td>  
+                        <span class="temp_hi"> {{ dailyMinMax.dailyMax }}&deg;</span> / 
+                        <span class="temp_low">{{ dailyMinMax.dailyMin }}&deg;  
+                 <td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+
+</div>
+<div class="dvDateTime">
+    <span id="dattimeHolder"></span><br/>
+    <span id ="dayMonthYearHolder"></span>
+    <div class="dvTimeOfDay">
+        <span id ="timeOfDayHolder"></span>
+    </div>
+    
+</div>
+<div class="dvZemanim">
+    <ul style="direction:rtl;">
+        {% for zman in Zemanim %}
+            <li> {{ zman }} : {{ Zemanim[zman] }} </li>
+        {% endfor %}
+    </ul>
+    <div style="float:right;">
+        <div id="hebcal-shabbat"></div>
+    </div>
+</div>
+
+
+
+<script defer>
+fetch('https://www.hebcal.com/shabbat?cfg=i2&geonameid=281184&M=on&lg=s&tgt=_top')
+  .then(response => response.text())
+  .then(data => document.getElementById('hebcal-shabbat').innerHTML = data);
+</script>
+
+
+<script type="text/javascript">
+    window.onload = setInterval(clock,1000);
+    function clock()
+    {
+        var d = new Date();
+        var date = d.getDate();
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        var monthArr = ["January", "February","March", "April", "May", "June", "July", "August", "September", "October", "November","December"];
+        month = monthArr[month];
+        document.getElementById("dattimeHolder").innerHTML=date+" "+month+", "+year;
+        document.getElementById('dayMonthYearHolder').innerHTML =d.toDateString()
+        document.getElementById('timeOfDayHolder').innerHTML=d.toTimeString().slice(0,8)
+    }
+    </script>
+{% endblock %}

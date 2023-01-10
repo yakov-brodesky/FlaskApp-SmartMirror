@@ -1,0 +1,57 @@
+body 
+{
+    margin: 0;
+    font-family: sans-serif;
+    background-color: black;
+    color: white;
+
+}
+
+.dvWeatherWrapper li
+{
+    display: block;
+    float: left;
+    padding: 20px;
+    border: 1px solid white;
+}
+
+.dvZemanim li
+{
+    display: block;
+    float: right;
+    padding: 20px;
+    /* border: 1px solid white; */
+}
+
+.dvWeatherWrapper
+{
+    width: 300px;
+    float: left;
+}
+
+.temp_hi
+{
+    color: orange;
+}
+
+.temp_low
+{
+    color:aqua;
+}
+
+.temp_hi img , .temp_low img
+{
+    height: 65px;
+}
+
+.dvZemanim
+{
+    float: right;
+    width: 300px;
+}
+
+.dvTimeOfDay
+{
+    font-size: 3em;
+    font-family:fantasy;
+}

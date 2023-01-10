@@ -1,0 +1,87 @@
+{% extends 'base2.html' %}
+
+
+    {% block body %}
+    <div class="region fullscreen below"><div class="container"></div></div>
+    <div class="region top bar">
+      <div class="container"></div>
+      <div class="region top left">
+        <div class="container">
+
+
+          <div class="weather" ng-controller="Weather">
+            <div class="weather-today">
+                <span class="icon dimmed wi {{data.Weather_description.description}}"></span>
+                <canvas id="icon_weather_current" width="4.68vw" height="6.48vh"></canvas>
+                <!-- <span class="temperature" ng-show="currentForecast.temperature" ng-bind="currentForecast.temperature + '&deg;'"></span> -->
+                <img src="{{data.Weather_description.icon}}" alt="weather_icon"  class="temperature">
+            </div>
+           
+        </div>
+        
+
+
+
+          <div class="dvWeatherWrapper">
+            <div class="dvDescription">
+               <span>{{data.Weather_description.description}}</span>
+                    <img src="{{data.Weather_description.icon}}" alt="weather_icon"  class="weatherIcn">
+            </div>
+            <!-- <table>
+                <tr>
+                    <td>
+        
+                    </td>
+                </tr>
+            </table> -->
+            <ul>
+                <li>
+                    
+        
+        
+        
+                </li>
+                <li>Temp : {{data.main_data.temp}}</li>
+                <li>Temp_max : {{data.main_data.max_temp}}</li>
+                <li>Temp_min : {{data.main_data.min_temp}}</li>
+                
+            </ul>
+            
+        
+        </div>
+
+        </div>
+      </div>
+      <div class="region top center"><div class="container"></div></div>
+      <div class="region top right"><div class="container"></div></div>
+    </div>
+    <div class="region upper third"><div class="container"></div></div>
+    <div class="region middle center"><div class="container"></div></div>
+    <div class="region lower third">
+      <div class="container"><br /></div>
+    </div>
+    <div class="region bottom bar">
+      <div class="container"></div>
+      <div class="region bottom left"><div class="container"></div></div>
+      <div class="region bottom center"><div class="container"></div></div>
+      <div class="region bottom right"><div class="container"></div></div>
+    </div>
+    <div class="region fullscreen above"><div class="container"></div></div>
+    {% endblock %}
+    
+    <!-- <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="vendor/node_modules/nunjucks/browser/nunjucks.min.js"></script>
+    <script type="text/javascript" src="js/defaults.js"></script>
+    <script type="text/javascript" src="#CONFIG_FILE#"></script>
+    <script type="text/javascript" src="vendor/vendor.js"></script>
+    <script type="text/javascript" src="modules/default/defaultmodules.js"></script>
+    <script type="text/javascript" src="js/logger.js"></script>
+    <script type="text/javascript" src="translations/translations.js"></script>
+    <script type="text/javascript" src="js/translator.js"></script>
+    <script type="text/javascript" src="js/class.js"></script>
+    <script type="text/javascript" src="js/module.js"></script>
+    <script type="text/javascript" src="js/loader.js"></script>
+    <script type="text/javascript" src="js/socketclient.js"></script>
+    <script type="text/javascript" src="js/main.js"></script> -->
+  </body>
+</html>
